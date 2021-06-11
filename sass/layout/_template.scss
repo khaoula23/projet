@@ -1,0 +1,37 @@
+@import "./../variables/variables";
+
+.chevron_front {
+  color: $offwhite;
+  font-weight: bold;
+}
+
+
+.round_back {
+  width: 30px;
+  height: 30px;
+  border: 1pt solid $purple;
+  border-radius: 15px;
+  background-color: $purple;
+}
+
+.round_back:hover {
+  width: 30px;
+  height: 30px;
+  border: 1pt solid $purple;
+  border-radius: 15px;
+  background-color: $purple;
+}
+
+
+            //bar
+.progress_2{
+  width: 200px;
+  height: 12px;
+  border: 1pt solid $darkpurple;
+  border-radius: 40px;
+}
+
+.progress_2_bar {
+  background-color: $purple;
+}
+

@@ -1,0 +1,110 @@
+@import "./../variables/variables";
+
+body {
+
+  background-color: $offwhite ;
+
+}
+
+.title-question-row {
+  padding-top: 5px;
+}
+
+.title-question-row {
+  font-weight: 700;
+}
+
+.date-created-question {
+  color: grey;
+  font-family: $chivofamily;
+  font-size: 12px;
+}
+
+.question-asked {
+  font-family: $chivofamily;
+  font-size: 15px;
+  background-color: $lightgrey;
+  padding: 10px 17px 10px 17px;
+  margin-bottom: 10px;
+  border-radius: 20px;
+}
+
+.question-asked-info {
+  font-family: $chivofamily;
+  font-size: 12px;
+  color: grey;
+}
+
+.btn-deletequestion {
+  border: 3px solid lightcoral;
+  background-color: lightcoral;
+  color: $offwhite;
+  font-family: $chivofamily;
+  padding: 5px 20px 5px 20px;
+  letter-spacing: 1px;
+  border-radius: 40px;
+}
+
+.question-answer-row {
+  margin-top: 20px;
+  padding: 10px 5px 10px 5px;
+  border-radius: 20px;
+  background-color: $pink;
+  position: relative;
+  
+}
+
+.question-answer-row.odd {
+  background-color: $lightpurple;
+}
+
+.upvote-img {
+  background-image:url("../../public/assets/img/thumbsup.png");
+}
+
+button.btn-no-bg {
+  background: no-repeat;
+  border: none;
+}
+
+.imageWrapperPost {
+  top: 22px;
+}
+
+.btn-forum {
+  border: 0px solid white;
+  @include box-shadow;
+}
+
+.postform {
+  background-color: $purple;
+  font-family: $chivofamily;
+  padding: 20px 20px 20px 20px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  margin-top: 20px;
+}
+
+.delete-post-form {
+  position: absolute;
+  top: -20px;
+  right: 6px;
+}
+
+.submitPost {
+  margin-top: 20px;
+}
+
+.submitPost:hover {
+  color: white;
+}
+
+.picturePost {
+  display: flex;
+  justify-content: center;
+}
+
+.deleteHover:hover {
+  border: 3pt solid lightcoral;
+  color: red;
+}

@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ 'Create Page' | trans }}
+{% endblock %}
+
+
+{% block body %}
+	<div class="example-wrapper">
+		<h1 class="title-css">{{ 'New Page Creation' | trans }}</h1>
+		<!-- Modal -->
+
+
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<section class="module-cube">
+						<span>{{ 'Chapter title' | trans }}:
+							{{ chapter.title(english) }}</span><br>
+						<span>{{ 'Chapter description' | trans }}:
+							{{ chapter.description(english) }}</span><br>
+						<span>{{ 'number of pages' | trans }}:
+							{{ chapter.pages|length }}</span><br>
+						<span>{{ 'Module Title' | trans }}:
+							{{ module.title(english) }}</span><br>
+
+					</section>
+				</div>
+			</div>
+			<div class="row mb-4">
+				<div class="col">
+					<a class="p-1 btn btn-skills button_8 buttonNavBox" href="{{ path('create_chapter', {'chapter': chapter.id, 'module': module.id}) }}">{{ 'Back to chapter' | trans }}</a>
+				</div>
+			</div>
+
+			{{ form_start(form) }}
+
+			<input type="hidden" name="position" value="{{ chapter.pages|length+1}}">
+
+			{{ form_row(form.title) }}
+			{{ form_row(form.content, {'attr': {'class': 'js-richtexteditor'}}) }}
+			<div class="text-center">
+				<button class="p-3 btn btn-skills button_8 buttonNavBox" value="exit" name="button">{{ 'Save' | trans }}
+					&
+					{{ 'exit' | trans }}</button>
+				<button class="p-1 btn btn-skills button_8 buttonNavBox" value="next" name="button">{{ 'Save' | trans }}
+					&
+					{{ 'create next page' | trans }}</button>
+			</div>
+			{{ form_end(form) }}
+
+		</div>
+	</div>
+	<br>
+
+	<script src="/assets/js/ckeditor5/build/ckeditor.js"></script>
+	<script src="/assets/js/l2g-ckeditor.js"></script>
+
+{% endblock %}

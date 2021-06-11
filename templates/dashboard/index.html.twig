@@ -1,0 +1,114 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <style>
+        .flagbtn {
+            cursor: pointer;
+        }
+    </style>
+    <div id="overlay" class="gone"></div>
+    <div class="example-wrapper my-5">
+
+        <h1 class="title-css my-5">{{ 'Learning Module Dashboard' | trans }}</h1>
+
+        <!-- add module button -->
+        <section class="row justify-content-between rowaddbutton main-page-button">
+            <a href="{{ path('create_module') }}">
+                <button type="button" class="btn  btn-circle btn-xl"
+                        data-toggle="tooltip" data-placement="right" title="Add new module">
+                    <img class="addicon" src="{{ asset('assets/img/plusicon.svg') }}" alt="add icon">
+                </button>
+                <p class="mt-2">{{ 'Create a new module' | trans }}</p>
+            </a>
+            <a href="{{ path('forum') }}">
+                <button type="button" class="btn btn-circle btn-xl"
+                        data-toggle="tooltip" data-placement="right" title="Go to forum">
+                    <img class="addiconflag" src="{{ asset('assets/img/chat.svg') }}" alt="flag icon">
+                </button>
+                <p class="mt-2">{{ 'Go to forum page' | trans }}</p>
+            </a>
+        </section>
+
+        <table class="mt-4 table table-hover text-center">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">{{ 'Title' | trans }}</th>
+                <th scope="col">{{ 'Chapters' | trans }}</th>
+                <th scope="col">{{ 'Translations' | trans }}<i
+                            title="This module's title and description translations.&#10;Click to go to that module's edit page."
+                            class="help-icon far fa-question-circle"></i></th>
+                <th scope="col">{{ 'Edit' | trans }}</th>
+                <th scope="col">{{'Check' | trans }}<i
+                            title="Click to check this module's problems.&#10;This process can take up to 15 seconds."
+                            class="help-icon far fa-question-circle"></i></th>
+                <th scope="col">{{ 'Status' | trans }}</th>
+                <th scope="col">&#10060;</th>
+                <th scope="col">&#128269;</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for module in allModules %}
+                {% set moduleArray = lmRepo.getModuleAsArray(module) %}
+                {% if moduleArray is not empty %}
+                    {% set moduleArray = moduleArray[0] %}
+                    <tr>
+                        <th scope="row">{{ loop.index }}</th>
+                        <td>{{ module.getTitle(language) }}</td>
+                        <td>{{ module.chapters|length }}</td>
+                        <td>
+                            {% for moduleTL in moduleArray['translations'] %}
+                                {% set badgeclass = 'badge-danger' %}
+                                {% if moduleTL['title'] != '' and moduleTL['description'] != '' %}
+                                    {% set badgeclass = 'badge-success' %}
+                                {% endif %}
+                                <a class="badge {{ badgeclass }}"
+                                   href="{{ path('edit_module_translation', {'module': moduleArray['id'], lang: moduleTL['language']['code']}) }}">{{ moduleTL['language']['name'] | lower }}</a>
+                            {% endfor %}
+                        </td>
+                        <td>
+                            <a class="badge badge-secondary" href="{{ path('edit_module', {'module': module.id}) }}">{{ 'overview' | trans }}</a>
+                        </td>
+                        <td>
+                            <div id="flagbtn-{{ module.id }}" class="flagbtn badge badge-primary"
+                                 onclick="checkModule({{ module.id }})">{{ 'Check' | trans }}
+                            </div>
+                        </td>
+                        {% if module.isPublished %}
+                            <td>
+                                <div class="badge text-success">{{ 'Published' | trans }}</div>
+                            </td>
+                        {% else %}
+                            <td id="publish-{{ module.id }}">
+                                <div class="badge text-danger">{{ 'Unpublished' | trans }}</div>
+                            </td>
+                        {% endif %}
+                        <td><a class="badge badge-danger" href="{{ path('delete_module', {module: module.id}) }}" onclick="return confirm('Are you sure about that?')">{{ 'Delete' | trans }}</a></td>
+                        <td><a class="badge badge-primary" href="{{ path('dashboard_module', {module: module.id}) }}">{{ 'Chapters' | trans }}</a></td>
+                    </tr>
+
+                    <tr class="module-row">
+                        {# sorry to the poor soul that has to style this #}
+                        {# I did a lot of js styling on this one #}
+                        {# displaying in a seperate table ruins the whole bootstrap table #}
+                        {# maybe try bootstrap tootltips or popups ? #}
+                        <td style="display: none; text-align: left; font-size: 0.75em"
+                            id="dump-{{ module.id }}" class="module-alert"></td>
+                    </tr>
+                {% else %}
+                    <tr class="text-center">
+                        <th scope="row">{{ loop.index }}</th>
+                        <td colspan="6">{{ 'This module needs more chapters!' | trans }} <a class="badge badge-warning" href="{{ path('edit_module', {'module': module.id}) }}">{{ 'add one' | trans }}</a>
+                        </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <script src="{{ asset('bundles/fosjsrouting/js/router.min.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+    <script src="{{ asset('assets/js/dashboardFlagging.js') }}"></script>
+{% endblock %}

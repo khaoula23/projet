@@ -1,0 +1,20 @@
+{% extends 'pass.html.twig' %}
+
+{% block title %}{{ 'Reset password' | trans }}!{% endblock %}
+
+{% block body %}
+
+<div class="example-wrapper">
+    <h1>{{ 'Reset your password!' | trans }}</h1>
+    <p>
+        {{ "If you've forgotten your password, enter your e-mail address and we'll send you an e-mail telling you how to recover it." | trans }}
+    </p>
+
+    <form action="" method="post">
+        <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Enter your e-mail address" required autofocus>
+        <button class="button button_2 margintop" type="submit" name="reset-request-submit">
+            {{ 'Send' | trans }}
+        </button>
+    </form>
+</div>
+{% endblock %}

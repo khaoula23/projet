@@ -1,0 +1,179 @@
+@import './variables/_variables';
+
+@mixin box-shadow {
+  -webkit-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+body {
+  color: $offblack;
+}
+
+@import './base/_base.scss';
+@import './layout/_learninghub.scss';
+@import './layout/_meeting_place.scss';
+@import './layout/_template.scss';
+@import './layout/_chapter.scss';
+@import './layout/_login.scss';
+@import './layout/_chapterquiz.scss';
+@import './layout/_modal.scss';
+@import './layout/_profile.scss';
+@import './layout/_forum.scss';
+@import './layout/_partnermainscreen.scss';
+@import './layout/_create_module.scss';
+@import './layout/_quiz.scss';
+@import './layout/_category.scss';
+@import './layout/_topic.scss';
+@import './layout/_question.scss';
+
+.custom-file-input {
+  opacity: 1;
+}
+
+/*
+
+To sass watch ->  sass --watch sass/app.scss:public/assets/css/app.css
+ */
+
+/* Draggable interface */
+
+.sortable {
+  li {
+    transition: all 0.5s;
+    cursor: move;
+  }
+
+  .ghost {
+    opacity: 0.5;
+    background: #c8ebfb;
+    border-color: #c8ebfb;
+  }
+
+  .chosen {
+    background-color: #ffff99;
+  }
+}
+
+.ui-meta-label {
+  text-transform: uppercase;
+  font-size: 12px;
+  color: #444;
+  font-weight: 300;
+}
+
+.card-body {
+  padding: 2rem;
+
+  li {
+    margin-bottom: 10px;
+  }
+}
+
+.card-text {
+  text-align: left;
+
+}
+
+@import 'layout/ckeditor';
+
+.ck-content {
+
+  padding: 50px;
+  margin: 50px;
+  font-family: 'Noto Serif', serif;
+
+  figure {
+    border: 1px solid #DDD;
+    padding: 10px;
+    font-size: 80%;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
+  & .media {
+    /* Don't allow floated content overlap the media.
+    https://github.com/ckeditor/ckeditor5-media-embed/issues/53 */
+    clear: both;
+
+    /* Make sure there is some space between the content and the media. */
+    margin: 1em 0;
+
+    /* Make sure media is not overriden with Bootstrap default `flex` value.
+    See: https://github.com/ckeditor/ckeditor5/issues/1373. */
+    display: block;
+
+    /* Give the media some minimal width in the content to prevent them
+    from being "squashed" in tight spaces, e.g. in table cells (#44) */
+    min-width: 15em;
+  }
+
+}
+
+.breadcrumb {
+  font-size: 88%;
+  background: white;
+  border-bottom: 1px solid #EEE;
+
+}
+
+.pagination {
+  display: block;
+
+  a.prev,
+  a.next {
+    position: relative;
+    display: inline;
+  }
+
+  a.prev {
+    float: left;
+  }
+
+  a.next {
+    float: right;
+  }
+}
+
+/* block ui */
+#js-block-ui {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+
+  &.hidden {
+    display: none;
+  }
+
+  .overlay {
+    width: 100%;
+    height: 100%;
+    background: white;
+    opacity: .5;
+  }
+
+  p {
+    position: absolute;
+    top: 45%;
+    left: 33%;
+    background: white;
+    padding: 5px 20px;
+    color: black;
+    font-size: 30px;
+    margin: 0 auto;
+    display: block;
+    max-width: 66%;
+    text-align: center;
+  }
+}
+
+
+#chapter-overview h3 {
+  background-color: #FDFDFD;
+}

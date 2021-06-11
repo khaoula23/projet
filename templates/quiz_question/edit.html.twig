@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'Edit QuizQuestion' | trans }}{% endblock %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a class="crumb crumb-link" href="{{ path('dashboard') }}">{{ 'Dashboard' | trans }}</a></li>
+    {% if returnCode == 'dash' %}
+        {% for crumb in quiz_question.dashboardBreadcrumbs(language) %}
+            {{ include('partials/breadcrumbs.html.twig') }}
+        {% endfor %}
+    {% elseif returnCode == 'flow' %}
+        {% for crumb in quiz_question.editBreadcrumbs(language) %}
+            {{ include('partials/breadcrumbs.html.twig') }}
+        {% endfor %}
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <h1 class="mod-title">{{ 'Edit Question' | trans }}</h1>
+    </div>
+    <div class="example-wrapper">
+        <h1 class="title-css">{{ 'Chapter: ' }}{{ quiz_question.quiz.chapter.trTitle(app.request.query.get('lang')) }}</h1>
+        <h2 class="subtitle-css">{{ 'Edit QuizQuestion ' | trans }} {{ quiz_question.questionNumber }}</h2>
+
+        {{ include('quiz_question/_form.html.twig', {'button_label': 'Update'}) }}
+        {{ include('quiz_question/_delete_form.html.twig') }}
+        <a href="{{ path('quiz_show', {'id': quiz_question.quiz.id, 'lang': app.request.query.get('lang')}) }}">
+            <button class="button button_2 btn-margin">{{ 'Back to list' | trans }}</button>
+        </a>
+    </div>
+{% endblock %}

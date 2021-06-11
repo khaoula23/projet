@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{'New QuizQuestion' | trans }}{% endblock %}
+
+{% block breadcrumbs %}
+        {% for crumb in quiz_question.getEditBreadcrumbs(app.user.language) %}
+            {{ include('partials/breadcrumbs.html.twig') }}
+        {% endfor %}
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <h1 class="mod-title">{{ 'New Question' | trans }}</h1>
+    </div>
+    <div class="example-wrapper">
+    <h1>{{'Create new QuizQuestion for:'  | trans }}</h1>
+    <h2>{{ quiz_question.quiz.chapter.trTitle(app.request.query.get('lang')) }}</h2>
+
+    {{ include('quiz_question/_form.html.twig') }}
+
+            <a class="" href="{{ path('quiz_show', {'id': quiz_question.quiz.id, 'lang': app.request.query.get('lang')}) }}">
+                <button class="button button_2 centerbutton btn-margin">{{ 'back to list' | trans }}</button>
+            </a>
+    </div>
+{% endblock %}

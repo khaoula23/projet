@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}L2G - {{ 'Portal' | trans }}{% endblock %}
+
+{% block body %}
+
+    <div class="example-wrapper">
+
+        <h1 class="title-css">{{ 'Learning hub' | trans | title }}</h1>
+        <p class="text-center intro-lh">{{ 'Navigate through the Learning Modules and find the right training for you to advance your skills' | trans }}</p>
+
+        <h2 class="subtitle-css">{{ 'Your courses' | trans | title }}</h2>
+
+        <div class="row forum-cat-row">
+            <div class="col-3 col-md-auto skillset">select skillset:</div>
+
+            <div class="col-3 col-md-auto">
+                <a class="btn button_1 btn-default btn-skills {% if mode == 'ALL' %} active-mode {% endif %} "  href="{{ path('portal') }}">{{ 'all' | trans | upper }}</a>
+            </div>
+
+            <div class="col-3 col-md-auto">
+                <a class="btn button_1 btn-default btn-skills {% if mode == 'SOFT' %} active-mode {% endif %}" href="{{ path('portal', {'mode': 'SOFT'}) }}">{{ 'soft' | trans | upper }}</a>
+            </div>
+            <div class="col-3 col-md-auto">
+                <a class="btn button_1 btn-default btn-skills {% if mode == 'HARD' %} active-mode {% endif %}" href="{{ path('portal', {'mode': 'HARD'}) }}">{{ 'hard' | trans | upper }}</a>
+            </div>
+        </div>
+
+        <div class="card-columns">
+            {% for module in activeModules %}
+                {% include 'portal/partials/module.html.twig' with {'module': module, 'label': 'Complete your course' } %}
+            {% endfor %}
+        </div>
+
+
+        {% for module in finishedModules %}
+            {% if loop.first %}
+                <h2 class="subtitle-css mt-5 mb-3">{{ 'your completed courses' | trans | title }}</h2>
+                <div class="card-columns">
+            {% endif %}
+            {% include 'portal/partials/module.html.twig' with {'module': module, 'label': 'Restart this course'} %}
+            {% if loop.last %}
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}

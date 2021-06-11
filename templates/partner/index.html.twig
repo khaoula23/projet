@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'Hello partner' | trans }}!{% endblock %}
+
+{% block body %}
+    <div class="example-wrapper">
+        <h1>{{ 'Hello partner' | trans }}!</h1>
+
+        <section class="row rowaddbutton">
+            <a href="{{ path('create_module') }}">
+                <button type="button" class="btn  btn-circle btn-xl"
+                        data-toggle="tooltip" data-placement="right" title="Add new module">
+                    <img class="addicon" src="{{ asset('assets/img/plusicon.svg') }}" alt="add icon">
+                </button>
+            </a>
+        </section>
+
+        <section class="row">
+            <a href="{{ path('dashboard') }}">
+                <button type="button" class="btn btn-circle btn-xl"
+                        data-toggle="tooltip" data-placement="right" title="Go to flagpage">
+                    <img class="addiconflag" src="{{ asset('assets/img/flagicon.svg') }}" alt="flag icon">
+                </button>
+            </a>
+        </section>
+
+{#        <hr>
+        <a href="{{ path('portal') }}">Back to Portal</a>
+
+        <hr>
+        <h2>Edit a module:</h2>
+        <h4>Showing all {{ language.name|lower }} modules</h4>
+        <table>
+            {% for module in modules %}
+                <tr>
+                    <td>
+                        <span><a href="{{ path('edit_module', { module : module.id }) }}">{{ module.title(language) }}</a></span><br>
+                        <ul>
+                            <li><span>isPublished: {{ module.isPublished ? 'true':'false' }}</span><br>
+                            <li><span>Chapters: {{ module.chapters|length }}</span><br>
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+        <hr>
+        <a href="{{ path('create_module') }}">Create Module</a>
+        <hr>
+        <a href="{{ path('forum') }}">Meeting Place</a>
+        <hr>
+        <a href="{{ path('dashboard') }}">Dashboard</a>
+        </table>#}
+
+    </div>
+{% endblock %}

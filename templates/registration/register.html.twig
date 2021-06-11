@@ -1,0 +1,25 @@
+{% extends 'home.html.twig' %}
+
+{% block title %}L2G - {{ 'Register' | trans }}{% endblock %}
+
+{% block body %}
+<div class="sidebar">
+
+    {{ form_start(registrationForm) }}
+{#        {{ form_row(registrationForm.avatar) }}#}
+        <div class="loginwrap">
+                {{ form_row(registrationForm.name) }}
+                {{ form_row(registrationForm.email) }}
+                {{ form_row(registrationForm.username) }}
+                {{ form_row(registrationForm.plainPassword) }}
+                {{ form_row(registrationForm.passwordRepeat) }}
+                {{ form_row(registrationForm.agreeTerms) }}
+
+                <button class="button button_1">{{ 'Register' | trans }}</button>
+        </div>
+    {{ form_end(registrationForm) }}
+        <p class="accountgot">
+                {{ 'Already have an account' | trans }}? <a href="{{ path('app_login') }}">{{ 'Login' | trans }}</a>
+        </p>
+</div>
+{% endblock %}

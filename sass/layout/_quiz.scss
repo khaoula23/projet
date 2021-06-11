@@ -1,0 +1,159 @@
+@import "./../variables/variables";
+
+
+.example-wrapper {
+  max-width: $wrapWidth;
+}
+
+#black{
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  background: black;
+  opacity: 0.5;
+}
+
+.shown{
+  display: block!important;
+  opacity: 1!important;
+  margin-top: 50px!important;
+}
+
+.noClick{
+  opacity: 0.4;
+  pointer-events: none;
+  border-color: $darkgreycolor!important;
+  background:$whitecolor!important;
+  color: $darkgreycolor!important;
+}
+
+#completeText{
+  font-weight: bold;
+  font-size: 14px;
+  position: absolute;
+  margin-top: -30px;
+  color: $darkgreycolor!important;
+}
+
+.modal-dialog{
+  padding: 20px;
+}
+
+.btnchapquiz {
+  width: 200px;
+  float: right;
+  margin-right: -50px;
+  margin-top: -50px;
+}
+
+.chapcardquiz {
+  padding: 50px 20px 50px 20px;
+  border-radius: 20px;
+  border: 4px solid $purple;
+  color: black;
+  background-color: white;
+}
+
+.chapcontainerquiz {
+  margin-top: 50px;
+}
+
+.button_5quiz {
+  font-family: 'Chivo', sans-serif;
+  font-size: 18px;
+  letter-spacing: 1px;
+  border-radius: 40px;
+  border: 3pt solid rgb(51, 0, 61);
+  -webkit-box-shadow: 12px 12px 19px -17px black;
+  -moz-box-shadow: 12px 12px 19px -17px black;
+  box-shadow: 12px 12px 19px -17px black;
+  background-color: rgb(51, 0, 61);
+  color: #f7f6f6;
+  width: 270px;
+}
+
+.button_5quiz:hover {
+  color: rgb(51, 0, 61);
+  background: #f7f6f6;
+  box-shadow: 12px 12px 19px -17px black;
+}
+
+.chapbutton_2quiz {
+
+  float: right;
+  margin-top: 50px;
+}
+
+@media only screen and (max-width: 770px) {
+  .example-wrapper {
+    width: 100%;
+  }
+
+  .btnchapquiz {
+    float: none;
+    margin: 0 auto;
+    display: block;
+  }
+
+  .chapcardquiz {
+    padding: 20px 20px 50px 20px;
+  }
+
+  .chapimgquiz {
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  .chapinfoquiz {
+    text-align: center;
+  }
+
+  h5 {
+    margin: 0 auto;
+  }
+
+  .chapbutton_2quiz {
+    float: none;
+    justify-content: center;
+  }
+}
+
+//Quiz creation style
+table{
+  margin-top: 2em;
+  width: 100%;
+}
+
+th {
+  background-color: $lightpurple;
+}
+
+.table-main-header {
+  background-color: $purple;
+  color: $white;
+}
+
+.badge-dark{
+  background-color: $darkpurple;
+}
+
+.btn-secondary{
+  background-color: $purple;
+}
+.btn-secondary:hover {
+  background-color: $darkpurple;
+}
+.btn-margin{
+  margin: 1em 0 1em 0;
+}
+
+.form-group{
+  text-align: left;
+}
+
+.deletebtn-table{
+  float: right;
+}

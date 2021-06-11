@@ -1,0 +1,145 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'Quiz'|trans }}{% endblock %}
+
+{% block breadcrumbs %}
+    {% for crumb in quiz.learnerBreadcrumbs(app.user.language) %}
+        {{ include('partials/breadcrumbs.html.twig') }}
+    {% endfor %}
+{% endblock %}
+
+{% block body %}
+    <div class="example-wrapper">
+        <form id="fetchForm" method="post" action="{{ path('quiz_send', {'quiz': quiz.id}) }}">
+            <h1 class="title-css">{{ module.getTitle(language) }}</h1>
+            <h1 class="subtitle-css">{{ 'Quiz'|trans }}</h1>
+
+            {% if test == false %}
+                <a href="{{ path('module_view_page', {'chapterPage': quiz.getChapter().getFirstPage().id}) }}" class="btn btn-default button button_4chap btnchapquiz">
+                    {{ 'Back to chapter'|trans }}
+                </a>
+                {% else %}
+                    <a class="btn btn-default button button_4chap btnchapquiz" href="{{ path('dashboard_chapter', {'chapter': quiz.chapter.id}) }}">{{ 'Back to Dashboard' | trans }}</a>
+            {% endif %}
+
+            <!--  question1   -->
+            <section id="chapter-overview">
+                {% for question in quiz.quizQuestions %}
+                <div class="container chapcontainerquiz">
+                    <div class="row"><h3>{{ 'Question' | trans}} {{ question.questionNumber }}</h3></div>
+                    <div class="row chapcardquiz">
+                        <div class="col-md-6 chapimgquiz">
+                            <p class="question"> {{ question.getTitle(language) }}</p>
+                        </div>
+                        <div class="col-md-6 chapinfoquiz">
+                            {% for answer in question.answers %}
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="questions[{{ question.id }}]" id="questions_{{answer.id}}"
+                                       value="{{answer.id}}">
+                                <label class="form-check-label" for="questions_{{answer.id}}">
+                                    {{ answer.getTitle(language) }}
+                                </label>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+                <div class="vertical-line"></div>
+            </section>
+            <div id="popup">
+                <div id="black" class="gone"></div>
+                <!-- Modal -->
+                <div class="modal fade" id="fail-pop" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content container center modalcontainer">
+                            <!--
+                            <div class="text-center imgmodal">
+                                <img src="https://via.placeholder.com/150" alt="">
+                            </div>
+                            -->
+
+                            <div class="text-center modal-message">
+                                <p class="message-one">{{ 'You are almost there.' | trans }}</p>
+                                <p><span id="process-percentage"></span> % {{ 'correct' | trans }}</p>
+                                <p class="message-two">{{ 'Give it another shot!' | trans }}</p>
+                            </div>
+
+                            <div class="row ">
+                                <div class="col-6">
+                                    <a href="{{ path('module_view_page', {'chapterPage': quiz.getChapter().getFirstPage().id}) }}"><button type="button" class="btn btn-primary button modalbutton modal-btn">Chapter info</button></a>
+                                </div>
+                                <div class="col-6">
+                                    <a href="./{{ quiz.id }}"><button type="button" class="btn btn-secondary button modalbutton" data-dismiss="modal">Try again</button></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="module-pop" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content container center modalcontainer">
+                            <div class="text-center imgmodal">
+                                <img src="https://via.placeholder.com/150" alt="" id="badgr-image" height="150">
+                            </div>
+
+                            <div class="text-center modal-message">
+                                <p class="message-one">{{ 'You completed the module.' | trans }}</p>
+                                <p class="message-two">{{ 'Well done!' | trans }}</p>
+                            </div>
+
+                            <div class="row ">
+                                <div class="col-6">
+                                    <a href="{{ path('profile') }}"><button type="button" class="btn btn-secondary button modalbutton" data-dismiss="modal">{{ 'Profile' | trans }}</button></a>
+                                </div>
+
+                                <div class="col-6">
+                                    <a href="{{ path('portal') }}"><button type="button" class="btn btn-primary button modalbutton modal-btn">{{ 'Learning Hub' | trans }}</button></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="chapter-pop" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content container center modalcontainer">
+                            <!--
+                            <div class="text-center imgmodal">
+                                <img src="https://via.placeholder.com/150" alt="">
+                            </div>
+                            -->
+
+                            <div class="text-center modal-message">
+                                <p class="message-one">{{ 'You completed this chapter.' | trans }}</p>
+                                <p class="message-two">{{ 'Well done!' | trans }}</p>
+                            </div>
+
+                            <div class="row ">
+                                <div class="col-6">
+                                    <a href="{{ path('profile') }}"><button type="button" class="btn btn-secondary button modalbutton" data-dismiss="modal">{{ 'Profile' | trans }}</button></a>
+                                </div>
+
+                                <div class="col-6">
+                                    <a href="{{ path('module', { module : module.id}) }}"><button type="button" class="btn btn-primary button modalbutton modal-btn">{{ 'Next chapter' | trans }}</button></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% if test == false %}
+                <div class="row chapbutton_2quiz">
+                    <p id="completeText">{{ 'Fill in all questions to submit' | trans }}</p>
+                    <button class="btn btn-default button_5quiz noClick" id="send-quiz">{{ 'Submit test' | trans }}</button>
+                </div>
+            {% endif %}
+        </form>
+    </div>
+
+    <script src="{{ asset('assets/js/quiz.js') }}"></script>
+{% endblock %}
